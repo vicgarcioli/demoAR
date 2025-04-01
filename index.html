@@ -1,5 +1,4 @@
-<html>
-  <head>
+ <head>
     <title>PEIXES NADANDO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
@@ -20,8 +19,25 @@
       
       <a-entity mindar-image-target="targetIndex: 0">
         <!-- Display the video instead of GIF -->
-        <a-video src="#peixVideo" position="0 0 0.1" scale="0.5 0.5 0.5" transparent="true"></a-video>
+        <a-video src="#peixVideo" position="0 0 0.1" scale="0.5 0.5 0.5" transparent="true" play-on-load></a-video>
       </a-entity>
     </a-scene>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const video = document.getElementById("peixVideo");
+        video.play().catch((error) => console.log("Autoplay blocked:", error));
+      });
+
+      AFRAME.registerComponent('play-on-load', {
+        init: function () {
+          const video = document.getElementById("peixVideo");
+          video.setAttribute("autoplay", "true");
+          video.setAttribute("loop", "true");
+          video.setAttribute("muted", "true");
+          video.play();
+        }
+      });
+    </script>
   </body>
 </html>
